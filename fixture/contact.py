@@ -146,6 +146,7 @@ class ContactHelper:
         wd.find_element_by_xpath("//input[@value='DELETE']").click()
         wd.switch_to_alert().accept()
 
+
     def select_first_contact(self):
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
