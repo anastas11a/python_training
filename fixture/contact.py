@@ -76,7 +76,7 @@ class ContactHelper:
     def edit_first_contact(self):
         wd = self.app.wd
         # select first contact
-        wd.find_element_by_name("selected[]").click()
+        self.select_first_contact()
         #click edit
         wd.find_element_by_xpath("//img[@alt='EDIT']").click()
         #edit fields
@@ -141,10 +141,14 @@ class ContactHelper:
     def delete_first_contact(self):
         wd = self.app.wd
         # select first contact
-        wd.find_element_by_name("selected[]").click()
+        self.select_first_contact()
         # submit deletion
         wd.find_element_by_xpath("//input[@value='DELETE']").click()
         wd.switch_to_alert().accept()
+
+    def select_first_contact(self):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
 
 
 
