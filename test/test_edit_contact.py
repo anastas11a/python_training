@@ -10,3 +10,4 @@ def test_edit_first_contact(app):
                                    email3="test email3 changed", homepage="test homepage changed", address2="test address changed", phone2="test phone home changed", notes="test notes changed"))
     new_contacts = app.contact.get_contact_list()
     assert len(old_contacts) == len(new_contacts)
+    old_contacts[0:1] == new_contacts

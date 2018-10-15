@@ -7,6 +7,7 @@ def test_modify_group_name(app):
     app.group.modify_first_group(Group(name="New group"))
     new_groups = app.group.get_group_list()
     assert len(old_groups)  == len(new_groups)
+    old_groups[0:1] == new_groups
 
 
 def test_modify_group_header(app):
@@ -16,6 +17,7 @@ def test_modify_group_header(app):
     app.group.modify_first_group(Group(header="New header"))
     new_groups = app.group.get_group_list()
     assert len(old_groups)  == len(new_groups)
+    old_groups[0:1] == new_groups
 
 def test_modify_all_fields(app):
     if app.group.count() == 0:
@@ -24,3 +26,4 @@ def test_modify_all_fields(app):
     app.group.modify_first_group(Group(name="group name changed", header="group header changed", footer="group footer changed"))
     new_groups = app.group.get_group_list()
     assert len(old_groups)  == len(new_groups)
+    old_groups[0:1] == new_groups
