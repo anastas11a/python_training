@@ -50,10 +50,10 @@ class ContactHelper:
         if not (wd.current_url.endswith("/edit.php") and len(wd.find_elements_by_name("submit")) > 0):
             wd.find_element_by_link_text("ADD_NEW").click()
 
-    def edit_first_contact(self, contact):
+    def edit_contact_by_index(self, index, contact):
         wd = self.app.wd
         # select first contact
-        self.select_first_contact()
+        self.select_contact_by_index(index)
         #click edit
         wd.find_element_by_xpath("//img[@alt='EDIT']").click()
         #edit fields
@@ -63,10 +63,16 @@ class ContactHelper:
         wd.find_element_by_link_text("home page").click()
         self.contact_cache = None
 
+    def edit_first_contact(self):
+            self.edit_contact_by_index(0)
+
     def delete_first_contact(self):
+        self.delete_contact_by_index(0)
+
+    def delete_contact_by_index(self,index):
         wd = self.app.wd
         # select first contact
-        self.select_first_contact()
+        self.select_contact_by_index(index)
         # submit deletion
         wd.find_element_by_xpath("//input[@value='DELETE']").click()
         wd.switch_to_alert().accept()
@@ -76,6 +82,10 @@ class ContactHelper:
     def select_first_contact(self):
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
+
+    def select_contact_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_name("selected[]")[index].click()
 
     def count(self):
         wd = self.app.wd
