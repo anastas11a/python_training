@@ -20,4 +20,4 @@ def merge_phones_like_on_phone_page(contact):
     return "\n".join(filter(lambda x: x != "",
     map(lambda x: clear(x),
         filter(lambda x: x is not None,
-               [contact.homephone, contact.workphone, contact.mobilephone, contact.phone2]))))
+               [contact.homephone, contact.mobilephone, contact.workphone, contact.phone2]))))
