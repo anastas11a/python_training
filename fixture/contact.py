@@ -81,6 +81,16 @@ class ContactHelper:
         wd.implicitly_wait(5)
         self.contact_cache = None
 
+    def delete_contact_by_id(self, id):
+        wd = self.app.wd
+        self.select_contact_by_id(id)
+        # submit deletion
+        wd.find_element_by_xpath("//input[@value='DELETE']").click()
+        wd.switch_to_alert().accept()
+        wd.implicitly_wait(5)
+        self.contact_cache = None
+
+
     def select_first_contact(self):
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
@@ -88,6 +98,10 @@ class ContactHelper:
     def select_contact_by_index(self, index):
         wd = self.app.wd
         wd.find_elements_by_name("selected[]")[index].click()
+
+    def select_contact_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("input[value='%s']" % id).click()
 
     def count(self):
         wd = self.app.wd
@@ -155,7 +169,3 @@ class ContactHelper:
         mobilephone = re.search("M: (.*)", text).group(1)
         phone2 = re.search("P: (.*)", text).group(1)
         return Contact(homephone=homephone, workphone=workphone, mobilephone=mobilephone, phone2=phone2)
-
-
-
-
