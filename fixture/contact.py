@@ -7,6 +7,7 @@ class ContactHelper:
     def __init__(self, app):
         self.app = app
 
+
     def create(self, contact):
         wd = self.app.wd
         # init contact creation
@@ -83,7 +84,7 @@ class ContactHelper:
 
 
     def edit_first_contact(self):
-            self.edit_contact_by_index(0)
+        self.edit_contact_by_index(0)
 
     def delete_first_contact(self):
         self.delete_contact_by_index(0)
@@ -186,3 +187,21 @@ class ContactHelper:
         mobilephone = re.search("M: (.*)", text).group(1)
         phone2 = re.search("P: (.*)", text).group(1)
         return Contact(homephone=homephone, workphone=workphone, mobilephone=mobilephone, phone2=phone2)
+
+    def add_contact_to_group(self, contact_id, group_id):
+        wd = self.app.wd
+        self.select_contact_by_id(contact_id)
+        self.select_group_by_id(group_id)
+        wd.find_element_by_name("to_group").click()
+        wd.find_element_by_xpath("(//option[@value='202'])[2]").click()
+        wd.find_element_by_name("add").click()
+        wd.find_element_by_link_text("HOME").click()
+
+    def select_group_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_xpath("(//option[@value='%s'])[2]" % id).click()
+
+
+
+
+

@@ -21,7 +21,7 @@ class ORMFixture:
         id = PrimaryKey(int, column='id')
         firstname = Optional(str, column='firstname')
         lastname = Optional(str, column='lastname')
-        deprecated = Optional(int, column='deprecated')
+        deprecated = Optional(str, column='deprecated')
         middlename = Optional(str, column="middlename")
         nickname = Optional(str, column="nickname")
         company = Optional(str, column="company")
