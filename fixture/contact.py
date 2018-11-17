@@ -193,15 +193,27 @@ class ContactHelper:
         self.select_contact_by_id(contact_id)
         self.select_group_by_id(group_id)
         wd.find_element_by_name("to_group").click()
-        wd.find_element_by_xpath("(//option[@value='202'])[2]").click()
+        wd.find_element_by_xpath("(//option[@value='% s'])[2]" % group_id).click()
         wd.find_element_by_name("add").click()
-        wd.find_element_by_link_text("HOME").click()
+        self.app.open_home_page()
 
     def select_group_by_id(self, id):
         wd = self.app.wd
         wd.find_element_by_xpath("(//option[@value='%s'])[2]" % id).click()
 
+    def open_contacts_in_group(self, group_id):
+        wd = self.app.wd
+        self.app.open_home_page()
+        wd.find_element_by_name("group").click()
+        wd.find_element_by_xpath("//option[@value='%s']" % group_id).click()
 
+    def del_contact_from_group(self):
+        wd = self.app.wd
+        self.select_first_contact()
+        wd.find_element_by_xpath("//*[@name='remove']").click()
 
-
+    def view_all_contacts(self):
+        wd = self.app.wd
+        wd.find_element_by_name("group").click()
+        wd.find_element_by_xpath("//option[2]").click()
 
